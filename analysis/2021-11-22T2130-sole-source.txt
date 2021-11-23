@@ -1,0 +1,88 @@
+Ran some numbers, out of, uh, curiosity, on non-competitive procurement in the Government of Canada.
+
+Non-competitive procurement (aka “sole-sourcing”) is governed by the Government Contracts Regulations: $25k for goods, $40k for services.
+
+---
+
+Until 2019, this limit was $25k for both goods and services. Check out the changes to section 6 (props to CanLII’s diff tool!): https://www.canlii.org/webdiff/diff.do?lang=en&path=%2Fen%2Fca%2Flaws%2Fregu%2Fsor-87-402%2Flatest%2Fsor-87-402.html&path=%2Fen%2Fca%2Flaws%2Fregu%2Fsor-87-402%2F129876%2Fsor-87-402.html#h=6080.78125
+
+(Or, from Justice, https://laws-lois.justice.gc.ca/eng/regulations/sor-87-402/section-6-20060322.html#wb-cont versus https://laws-lois.justice.gc.ca/eng/regulations/sor-87-402/section-6-20190610.html#wb-cont)
+
+[sidenote: geeking out on legal diffing]
+
+---
+
+So I wondered, a few years after the change: have we seen a change in the size of sole-sourced contracts?
+
+Fortunately, we have the data: https://open.canada.ca/data/en/dataset/d8f85d91-7dec-4fd1-8055-483b77225d8b
+
+(Huge kudos to the teams, at TBS and in all departments, that maintain this dataset. It’s good—and just gets better.)
+
+---
+
+It’s fairly straightforward to investigate: we can take the contract values, floor them (round down) to the nearest $1000, then see how frequently different “floored contract values” appear.
+
+We’ll use “original contract value”, since that’s what Contracting would review.
+
+---
+
+If the sole-source limits affect contracting behaviour, we’d expect:
+
+- values near the limit appear frequently
+- when the limit changes, values near the new limit would rise in frequency
+
+---
+
+And, my friends, it’s true!
+
+You can see the analysis code here: https://github.com/lchski/gc-contracting-analysis/blob/main/analysis/sole-source.R
+
+Observations follow :)
+
+---
+
+From 2016–17 through 2019–20, $24k (just under $25k limit) is the most common “floored to the $1000th” original contract value.
+
+Starting in 2020–21, $39k (just under new $40k limit for services) suddenly appears in the top 3 list.
+
+https://github.com/lchski/gc-contracting-analysis/blob/main/data/out/2021-11-22-gcr-sole-source-limits/top_3_rounded_original_values_by_fy.csv
+
+---
+
+And if we disaggregate by “goods or services contract?”, the behavioural response is even clearer.
+
+That switch in 2020–21, where $39k rushes into the top 3? It only appears for services contracts—not for goods. For goods, $24k remains top.
+
+https://github.com/lchski/gc-contracting-analysis/blob/main/data/out/2021-11-22-gcr-sole-source-limits/top_3_rounded_original_values_by_commodity_type_by_fy.csv
+
+---
+
+(Sidenote: After $24k, $10/$11/$12k is consistently near the top. In 2016–17, $10k actually barely tops $24k for most frequent rounded goods contract value. Why? Who knows! “For further research”, as they say 😉)
+
+---
+
+In other words, to return to our hunches:
+
+- values near the limit ($24k until 2019, then both $24k and $39k) appear frequently
+- when the limit changes (in 2019–20), values near the new limit ($39k) would rise in frequency (as happens in 2020–21)
+
+---
+
+This isn’t really a surprise, to be clear. Anecdata from within government makes this a pretty familiar phenomenon.
+
+And it makes sense: if it’s easier to sole source than to compete, you’ll maximize the value you can get from a sole-sourced contract.
+
+---
+
+(And sole sourcing can make sense! It costs money to put a contract in place, to manage it, to pay for it, etc. At low dollar values—and $40k is low for government, or most any large organization—it literally costs more to compete than it’s worth.)
+
+---
+
+But it speaks to the importance of the sole-source limits: whatever their level, they’ll affect the most frequent non-competed contract values.
+
+(This analysis probably exists elsewhere, done more rigorously than mine—if you know of it, please share and I’ll reshare 🙂)
+---
+
+I’ll wrap this should-be-a-blog-post thread here, and note what I appreciate most: the data are *available* to answer this question. (I feel strongly about contracting data: https://goc-spending.github.io/)
+
+Kudos to the folks who make that happen. Hoorah for open data and analysis!
